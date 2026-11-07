@@ -25,7 +25,7 @@ fun AppNavigation(
                 error = viewModel.error.value,
                 onRetry = { viewModel.loadCountries() },
                 onCountryClick = { code -> navController.navigate("detail/$code") },
-                onPlay = { }
+                onPlay = { navController.navigate("play") }
             )
         }
         composable("detail/{code}") { input ->
@@ -34,6 +34,9 @@ fun AppNavigation(
                 country = viewModel.searchCountry(code),
                 onBack = { navController.popBackStack() }
             )
+        }
+        composable("play") {
+            PlayScreen(countries = viewModel.countries.value)
         }
     }
 }
